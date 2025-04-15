@@ -24,6 +24,9 @@ jobs:
         python -m pip install --upgrade pip
         pip install -r requirements.txt
 
+    - name: Set Hugging Face token as environment variable
+      run: echo "HF_TOKEN=${{ secrets.HF_TOKEN }}" >> $GITHUB_ENV
+
     - name:  Run Flask app test (basic check)
       run: |
         echo "from app import app" > test_import.py
@@ -31,4 +34,3 @@ jobs:
 
     - name:  Deploy to Render or any host (manual for now)
       run: echo " CI Passed. Ready for deploy!"
-
