@@ -2,45 +2,45 @@ name: CI/CD for Student Code Buddy
 
 on:
   push:
-    branches: [main]  # Trigger workflow on push to the main branch
+    branches: [main]  # Runs when there's a push to the main branch
   pull_request:
-    branches: [main]  # Trigger workflow on pull request to the main branch
+    branches: [main]  # Runs when a pull request targets the main branch
 
 jobs:
   build-and-deploy:
-    runs-on: ubuntu-latest  # Use the latest Ubuntu environment for the action
+    runs-on: ubuntu-latest  # The environment where the action will run
 
     steps:
     - name: Checkout code
-      uses: actions/checkout@v3  # Checks out your code from the repository
+      uses: actions/checkout@v3  # Checks out your code
 
     - name: Set up Python
-      uses: actions/setup-python@v4  # Sets up Python environment
+      uses: actions/setup-python@v4  # Sets up the Python environment
       with:
-        python-version: '3.11'  # Specify Python version (3.11)
+        python-version: '3.11'  # Use Python version 3.11
 
     - name: Install dependencies
       run: |
-        python -m pip install --upgrade pip  # Upgrade pip to the latest version
-        pip install -r requirements.txt  # Install project dependencies
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt  # Installs project dependencies
 
     - name: Set Hugging Face token as environment variable
-      run: echo "HF_TOKEN=${{ secrets.HF_TOKEN }}" >> $GITHUB_ENV  # Set Hugging Face token as environment variable
+      run: echo "HF_TOKEN=${{ secrets.HF_TOKEN }}" >> $GITHUB_ENV  # Add Hugging Face token to the environment
 
     - name: Run Flask app test (basic check)
       run: |
-        echo "from app import app" > test_import.py  # Create a temporary Python script to check import
-        python test_import.py  # Run the test to check Flask app import
+        echo "from app import app" > test_import.py
+        python test_import.py  # Tests the Flask app import
 
     - name: Set up AWS CLI
-      uses: aws-actions/configure-aws-credentials@v1  # Configure AWS CLI with credentials
+      uses: aws-actions/configure-aws-credentials@v1  # Configures AWS credentials
       with:
-        aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}  # AWS Access Key ID
-        aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}  # AWS Secret Access Key
-        aws-region: us-east-1  # AWS region for your S3 bucket
+        aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}  # Uses the AWS Access Key ID secret
+        aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}  # Uses the AWS Secret Access Key secret
+        aws-region: us-east-1  # Use the appropriate AWS region for your S3 bucket
 
     - name: Deploy to AWS S3 (auto-deploy)
       run: |
         echo "Syncing files to S3 bucket..."
-        aws s3 sync ./ s3://student-code-buddy-website/ --delete --exclude ".git/*" --exclude "test_import.py"  # Sync files to S3
+        aws s3 sync ./ s3://student-code-buddy-website/ --delete --exclude ".git/*" --exclude "test_import.py"  # Deploy to S3
         echo "Deployment to S3 complete!"
