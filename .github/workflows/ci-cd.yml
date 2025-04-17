@@ -8,32 +8,32 @@ on:
 
 jobs:
   build-and-deploy:
-    runs-on: ubuntu-latest  # Use latest Ubuntu runner for the build
+    runs-on: ubuntu-latest
 
     steps:
     - name: Checkout code
-      uses: actions/checkout@v3  # Checkout the code from the repository
+      uses: actions/checkout@v3
 
     - name: Set up Python
-      uses: actions/setup-python@v4  # Set up Python environment
+      uses: actions/setup-python@v4
       with:
-        python-version: '3.11'  # Set Python version 3.11
+        python-version: '3.11'
 
     - name: Install dependencies
       run: |
-        python -m pip install --upgrade pip  # Upgrade pip to the latest version
-        pip install -r requirements.txt  # Install project dependencies listed in requirements.txt
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
 
     - name: Set Hugging Face token (optional)
-      if: ${{ secrets.HF_TOKEN != '' }}  # If the Hugging Face token is present in secrets, set it as an environment variable
-      run: echo "HF_TOKEN=${{ secrets.HF_TOKEN }}" >> $GITHUB_ENV
+      run: |
+        echo "HF_TOKEN=${{ secrets.HF_TOKEN }}" >> $GITHUB_ENV
 
     - name: Run Flask app import test
       run: |
-        echo "from app import app" > test_import.py  # Create a temporary file to test Flask app import
-        python test_import.py  # Run the test to check if Flask app is imported correctly
+        echo "from app import app" > test_import.py
+        python test_import.py
 
     - name: Trigger Render Deploy
       run: |
         echo "Triggering Render Deploy..."
-        curl -X POST ${{ secrets.RENDER_DEPLOY_HOOK }}  # Trigger a manual deployment on Render using the deploy hook URL
+        curl -X POST ${{ secrets.RENDER_DEPLOY_HOOK }}
