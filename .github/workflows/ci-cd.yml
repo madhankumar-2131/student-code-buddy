@@ -44,3 +44,10 @@ jobs:
         echo "Syncing files to S3 bucket..."
         aws s3 sync ./ s3://student-code-buddy-website/ --delete --exclude ".git/*" --exclude "test_import.py"  # Deploy to S3
         echo "Deployment to S3 complete!"
+    
+    - name: Send notification to Slack (optional)
+      if: success()  # Only send if the deployment was successful
+      run: |
+        curl -X POST -H 'Content-type: application/json' \
+        --data '{"text":"Deployment to S3 completed successfully for Student Code Buddy!"}' \
+        ${{ secrets.SLACK_WEBHOOK_URL }}  # Send notification to Slack using your webhook URL
