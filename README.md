@@ -34,9 +34,15 @@ Build a simple yet functional AI tool using Hugging Face to help students genera
 
 ---
 
-## 🧪 Run Locally
+## 🧪 Run Locally..
 ![LOCAL](https://github.com/user-attachments/assets/09f64a59-f0bf-4bcc-ba3c-e9deca6498b4)
 
+---
+## 🧪 Run Globally..
+![code](https://github.com/user-attachments/assets/9ede94e6-403a-43b8-a96b-a82f00c30e27)
+-
+✅ Secure API key management  
+✅ Clean and minimal deployment pipeline
 ## Prerequisites
 Before running this application, ensure you have:
 - Python 3.11+ installed
@@ -55,7 +61,6 @@ CI Passed. Ready for deploy!
 Deploying to Render...
 Deployment Successful!
 
-
 ![render](https://github.com/user-attachments/assets/04382681-e187-459b-a87a-11f6024ab7a0)
 
 
@@ -64,10 +69,14 @@ Deployment Successful!
 The application allows students to input a programming prompt, and it will return an AI-generated code snippet based on the input. For example:
 
 ![genai - ](https://github.com/user-attachments/assets/87d2ff27-5a81-4192-8084-5268d532b336)
+![GENERATING](https://github.com/user-attachments/assets/126f28fd-3704-48dd-8fc3-8af0db15ea45)
 
 ✅Cloning the repository ensures you get the latest version of the project to your local machine.
 
 ✅Navigating to the project directory allows you to work directly within the project.
+
+
+![hugging face](https://github.com/user-attachments/assets/a8dc842b-c091-4336-8570-411422bcd660)
 
 ✅Installing dependencies ensures all the necessary packages are installed so the app runs smoothly.
 
