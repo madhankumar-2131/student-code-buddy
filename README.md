@@ -3,7 +3,7 @@
 **Student Code Buddy** is a lightweight AI-based code generation assistant designed for students.  
 This project highlights my practical skills in **DevOps, CI/CD, and cloud deployment.**
 
-🌐 **Live Demo**: [student-code-buddy.onrender.com](https://student-code-buddy-1.onrender.com/)
+🌐 **Live Demo**: [student-code-buddy.onrender.com](https://student-code-buddy.onrender.com)
 
 ---
 
